@@ -1,10 +1,15 @@
-// WhatsApp booking links with optional vehicle context
+// WhatsApp booking links that also include the current page URL
 const phone = "917870639642"; // India number without + or spaces
+
 function buildWaLink(extraText = "") {
+  const pageURL = typeof window !== "undefined" ? window.location.href : "";
   const base =
-    "Hi Unique Cab Services,\n\nI want to book a cab.\nPickup: \nDrop: \nDate/Time: \nPassengers: \nVehicle type: " +
+    "Hi Unique Cab Services,\n\nI want to book a cab.\n" +
+    "Pickup: \nDrop: \nDate/Time: \nPassengers: \nVehicle / Tour: " +
     (extraText ? extraText : "") +
+    "\n\nPage link: " + pageURL +
     "\n\nPlease confirm availability and fare. Thanks!";
+
   return `https://wa.me/${phone}?text=${encodeURIComponent(base)}`;
 }
 
